@@ -1,0 +1,6 @@
+src/decls/**/*.js
+src/vendor/**/*.js
+src/test/utils.js
+*.test.js
+example/
+lib/
