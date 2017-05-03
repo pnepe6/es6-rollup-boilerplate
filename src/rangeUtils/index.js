@@ -1,3 +1,7 @@
+// // Test cross import
+// import unitUtils from '../unitUtils/index';
+// console.log(unitUtils);
+
 class RangeUtils {
   /**
    * Convert a value within a range to it's equivalent within another map range
@@ -11,8 +15,8 @@ class RangeUtils {
    * @returns {number}
    */
   mapBetween(valueNow, valueMin, valueMax, rangeMin = 0, rangeMax = 100) {
-    return (rangeMax - rangeMin) * (valueNow - valueMin) / (valueMax - valueMin) + rangeMin // eslint-disable-line no-mixed-operators
+    return (rangeMax - rangeMin) * (valueNow - valueMin) / (valueMax - valueMin) + rangeMin; // eslint-disable-line no-mixed-operators
   }
 }
 
-export default new RangeUtils()
+export default new RangeUtils();

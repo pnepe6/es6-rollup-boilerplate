@@ -19,20 +19,20 @@ class UnitUtils {
    */
   math = {
     addition: function addition(a, b) {
-      const unit = this.detectUnit(a) || this.detectUnit(b)
-      return (this.rmUnit(a) + this.rmUnit(b)) + unit
+      const unit = this.detectUnit(a) || this.detectUnit(b);
+      return (this.rmUnit(a) + this.rmUnit(b)) + unit;
     }.bind(this),
     subtract: function subtract(a, b) {
-      const unit = this.detectUnit(a) || this.detectUnit(b)
-      return (this.rmUnit(a) - this.rmUnit(b)) + unit
+      const unit = this.detectUnit(a) || this.detectUnit(b);
+      return (this.rmUnit(a) - this.rmUnit(b)) + unit;
     }.bind(this),
     multiply: function multiply(a, b) {
-      const unit = this.detectUnit(a) || this.detectUnit(b)
-      return (this.rmUnit(a) * this.rmUnit(b)) + unit
+      const unit = this.detectUnit(a) || this.detectUnit(b);
+      return (this.rmUnit(a) * this.rmUnit(b)) + unit;
     }.bind(this),
     divide: function divide(a, b) {
-      const unit = this.detectUnit(a) || this.detectUnit(b)
-      return (this.rmUnit(a) / this.rmUnit(b)) + unit
+      const unit = this.detectUnit(a) || this.detectUnit(b);
+      return (this.rmUnit(a) / this.rmUnit(b)) + unit;
     }.bind(this),
   };
 
@@ -44,22 +44,22 @@ class UnitUtils {
    * @returns {*}
    */
   detectUnit = (value) => {
-    let ext
-    const valueStr = value.toString()
+    let ext;
+    const valueStr = value.toString();
     if (valueStr.match(this.UNIT.PX)) {
-      ext = this.UNIT.PX
+      ext = this.UNIT.PX;
     } else if (valueStr.match(this.UNIT.REM)) {
-      ext = this.UNIT.REM
+      ext = this.UNIT.REM;
     } else if (valueStr.match(this.UNIT.EM)) {
-      ext = this.UNIT.EM
+      ext = this.UNIT.EM;
     } else if (valueStr.match(this.UNIT.PERCENT)) {
-      ext = this.UNIT.PERCENT
+      ext = this.UNIT.PERCENT;
     } else if (!isNaN(value)) {
-      return null
+      return null;
     } else {
-      throw new Error(`detectUnit can't find unit for ${value}`)
+      throw new Error(`detectUnit can't find unit for ${value}`);
     }
-    return ext
+    return ext;
   }
 
   /**
@@ -72,10 +72,10 @@ class UnitUtils {
    * @returns {Number} without it's unit
    */
   rmUnit = (value, unit) => {
-    const valueStr = value.toString()
-    const ext = unit || this.detectUnit(valueStr)
-    const number = valueStr.replace(ext, '')
-    return parseFloat(number)
+    const valueStr = value.toString();
+    const ext = unit || this.detectUnit(valueStr);
+    const number = valueStr.replace(ext, '');
+    return parseFloat(number);
   }
 
   /**
@@ -86,10 +86,10 @@ class UnitUtils {
    * @returns {string} percentage value
    */
   toPercent = (value, total = 100, decimal = 2) => { // eslint-disable-line arrow-body-style
-    return `${Math.floor((value / total * 100) * (10 ** decimal)) / (10 ** decimal)}${this.UNIT.PERCENT}` // eslint-disable-line no-mixed-operators
+    return `${Math.floor((value / total * 100) * (10 ** decimal)) / (10 ** decimal)}${this.UNIT.PERCENT}`; // eslint-disable-line no-mixed-operators
   }
 
 }
 
-export default new UnitUtils()
+export default new UnitUtils();
 
