@@ -5,3 +5,5 @@ dist
 .DS_Store
 bundle-stats.html
 .idea/
+build
+config

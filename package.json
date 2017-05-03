@@ -3,10 +3,10 @@
   "version": "0.0.01",
   "description": "module building with rollup",
   "main": "lib/index.js",
-  "typings": "typings/styled-components.d.ts",
-  "jsnext:main": "dist/styled-components.es.js",
-  "module": "dist/styled-components.es.js",
+  "jsnext:main": "dist/module-rollup.es.js",
+  "module": "dist/module-rollup.es.js",
   "scripts": {
+    "init": "",
     "build": "npm run build:lib && npm run build:dist",
     "prebuild:lib": "rimraf lib/*",
     "build:lib": "babel --out-dir lib src",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/styled-components/styled-components.git"
+    "url": "ssh://git@module.kopaxgroup.com:20024/agd/module-rollup.git"
   },
   "files": [
     "CONTRIBUTING.md",
@@ -32,19 +32,61 @@
     "src"
   ],
   "keywords": [
-    "react",
-    "css",
-    "css-in-js",
-    "styled-components"
+    "babel",
+    "roll-up"
   ],
-  "author": "Glen Maddern",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/styled-components/styled-components/issues"
-  },
-  "homepage": "https://styled-components.com",
-  "dependencies": {
-    "math-utils": "git+ssh://git@module.kopaxgroup.com:20024/dev-tools/math-utils.git#v0.2.0"
+  "author": "Adrien GADAUD <adrien.gadaud@kopaxgroup.com>",
+  "license": "UNLICENSED",
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": "airbnb-base",
+    "env": {
+      "browser": true,
+      "node": true,
+      "jest": true,
+      "es6": true
+    },
+    "plugins": [],
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    },
+    "rules": {
+      "arrow-parens": [
+        "error",
+        "always"
+      ],
+      "arrow-body-style": [
+        2,
+        "as-needed"
+      ],
+      "comma-dangle": [
+        2,
+        "always-multiline"
+      ],
+      "import/imports-first": 0,
+      "import/newline-after-import": 0,
+      "import/no-dynamic-require": 0,
+      "import/no-extraneous-dependencies": 0,
+      "import/no-named-as-default": 0,
+      "import/no-unresolved": 2,
+      "import/prefer-default-export": 0,
+      "indent": [
+        2,
+        2,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "max-len": 0,
+      "newline-per-chained-call": 0,
+      "no-confusing-arrow": 0,
+      "no-console": 1,
+      "no-use-before-define": 0,
+      "prefer-template": 2,
+      "class-methods-use-this": 0,
+      "require-yield": 0
+    }
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",
@@ -55,17 +97,12 @@
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-class-properties": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.22.0",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.1",
     "babel-preset-env": "^1.4.0",
-    "babel-preset-react": "^6.22.0",
     "enzyme": "^2.8.2",
     "eslint": "^3.15.0",
-    "eslint-config-airbnb": "^13.0.0",
+    "eslint-config-airbnb-base": "10.0.1",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.0.2",
-    "eslint-plugin-react": "^6.8.0",
     "jest": "^19.0.2",
-    "jsdom": "^9.10.0",
     "lint-staged": "^3.3.0",
     "pre-commit": "^1.2.2",
     "rimraf": "^2.6.1",
@@ -79,14 +116,11 @@
     "rollup-plugin-uglify": "^1.0.1",
     "rollup-plugin-visualizer": "^0.1.5"
   },
-  "peerDependencies": {
-  },
   "jest": {
     "roots": [
       "<rootDir>/src/"
     ],
-    "testPathIgnorePatterns": [
-    ]
+    "testPathIgnorePatterns": []
   },
   "lint-staged": {
     "*.js": [

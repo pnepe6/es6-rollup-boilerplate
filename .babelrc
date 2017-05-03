@@ -1,7 +1,6 @@
 {
   "presets": [
-    ["env", { "loose": true }],
-    "react"
+    ["env", { "loose": true }]
   ],
   "plugins": [
     "add-module-exports",
