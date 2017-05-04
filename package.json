@@ -1,16 +1,17 @@
 {
-  "name": "module-rollup",
-  "version": "0.0.01",
-  "description": "module building with rollup",
+  "name": "module",
+  "version": "0.0.1",
+  "description": "Insert module description here",
   "main": "lib/index.js",
-  "jsnext:main": "dist/module-rollup.es.js",
-  "module": "dist/module-rollup.es.js",
+  "jsnext:main": "dist/module.es.js",
+  "module": "dist/module.es.js",
   "scripts": {
-    "init": "",
+    "create": "npm run build:clean && node ./internal/scripts/initPackage --",
     "build": "npm run build:lib && npm run build:dist",
     "prebuild:lib": "rimraf lib/*",
     "build:lib": "babel --out-dir lib src",
     "prebuild:dist": "rimraf dist/*",
+    "build:clean": "rimraf lib/* dist/*",
     "build:dist": "rollup -c && rollup -c --environment PRODUCTION",
     "build:watch": "npm run build:lib -- --watch",
     "test": "npm run lint && npm run test:web",
@@ -21,8 +22,7 @@
     "lint-staged": "lint-staged"
   },
   "repository": {
-    "type": "git",
-    "url": "ssh://git@module.kopaxgroup.com:20024/agd/module-rollup.git"
+    "url": ""
   },
   "files": [
     "CONTRIBUTING.md",
@@ -31,11 +31,8 @@
     "lib",
     "src"
   ],
-  "keywords": [
-    "babel",
-    "roll-up"
-  ],
-  "author": "Adrien GADAUD <adrien.gadaud@kopaxgroup.com>",
+  "keywords": "",
+  "author": "",
   "license": "UNLICENSED",
   "eslintConfig": {
     "parser": "babel-eslint",
@@ -46,7 +43,6 @@
       "jest": true,
       "es6": true
     },
-    "plugins": [],
     "parserOptions": {
       "ecmaVersion": 6,
       "sourceType": "module"
