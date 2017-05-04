@@ -1,6 +1,6 @@
 # Docs
+Adaptive UMD module boilerplate with multi core level applying cascade's update logic. Quickly begin your small to large modules collections in JS until React.
 
-ES6 and React module bundler with library collection of templates, components and utils with cascade updates.
 
 ### Index
  * [Module documentation](#module-documentation)
@@ -12,21 +12,30 @@ ES6 and React module bundler with library collection of templates, components an
 
 
 ### Module documentation
-- Module bundle system
-ES6/React Bundler uses Babel for transpilation, RollUp for bundle and Eslint with Jest for Test driven development in order to build UMD defined modules.
+This module boilerplate let you focus on your code "level" and manage only the configuration and dependencies you need for your project. 
+Levels are git repositories branch composed of different core managing modules lifecycle from bundle/transpilation, test driven development, js frameworks until external libraries.
 
-- Library collection
-Various collection of templates, components, utils and other elements required to build ES6 and JSX/React defined websites and web applications.
+#### Git repository branch level
+In addition to being preconfigurated, each repositoty are updated from the top level (0) until the last level which host your project. In this way each git repository recovers updates from previous level.
+    - Module boilerplate (level 0): Rollup (UMD bundler) and Babel (CJS/ES transpiler)
+    - TDD extend (level 1): Eslint, Jest
+    - Framework extend (level 2): React
+    - Library extend (level 3): Bootstrap-styled
+    - See [Extend module library](#extend-module-library) for add new level/branch
 
-- Cascade updates
-This module sample is constitued of different abstraction level adapted to build project from simple js project to ES6 defined or React defined project.
-Updates are done in cascade process and let developers to only focus on his code dependencies update.
+#### Common usage:
+- level 0: Quick start any small js project
+starter UMD/CJS/ES modules
 
-- Abstraction of development with git branches levels
-    - origin master = level 0 (useful for initialize light project in es6)
-    - origin es6 = level 1 (useful for start project in es6 with internal dependencies)
-    - origin react = level 2 (useful for start project in react with 6s6 and jsx code with internal and external dependencies)
-    - see [Extend module library](#extend-module-library) for add new level/branch
+- level 1: Quick start small to large js utils modules.
+starter UMD/CJS/ES modules + TDD tools
+
+- level 2: Quick start small to large modules framework addon, as component library for React
+starter UMD/CJS/ES modules + TDD tools + react framework
+
+- level 3: Quick start small to large specific modules collection as template for React
+starter UMD/CJS/ES modules + TDD tools + React framework + External library (bootstrap-styled)
+
 
 ### Changelog
 #### Added
@@ -34,44 +43,34 @@ Updates are done in cascade process and let developers to only focus on his code
 
 #### Changed
 
-- Migrated from the deprecated `React.PropTypes` to the `prop-types` package, thanks to [@YasserKaddour](https://github.com/YasserKaddour). (see [#668](https://github.com/styled-components/styled-components/pull/668))
-- Add FlatList, SectionList & VirtualizedList support, thanks to @Kureev(https://github.com/Kureev). (see [#662](https://github.com/styled-components/styled-components/pull/662))
-- Removed dependency on `glamor` and migrated remaining references to the internval vendored `glamor` module. (see [#663](https://github.com/styled-components/styled-components/pull/663))
-- Fix missing autoprefixing on GlobalStyle model. (see [#702](https://github.com/styled-components/styled-components/pull/702))
-- Better support for `keyframes` on older iOS/webkit browsers (see [#720](https://github.com/styled-components/styled-components/pull/720))
-
-#### [v1.4.4] — 2017-03-01
-
 
 ### Quick start
-
 Clone project
 
     git clone git+ssh://git@module.kopaxgroup.com:20024/agd/module-rollup.git
    
-Initialize git config project (change ssh url if needed)
-
-    rm -rf .git && git init && git remote add origin ssh://git@module.kopaxgroup.com:20024/agd/module-rollup.git
-    
 Switch to branch origin : es6 or react (default branch master)
 
     git checkout es6
     
-Initialize package.json (change key "name" value in package.json before use, it will add new name instead of last one in other key using "name" value)
+Init project : it will initialize package.json and reset git folder (note this command could only be used once and will be remove from the package.json script command list after use. For any needs please delete your empty proejct and restart git clone to set a new name)
     
-    npm run create
+    npm run create my-awesome-module-collection
+    
+Add new remote to your project (note to give a correct git url instead of upstream)
+    
+    git remote add branch upstream
     
 
 ### Developers
 The developer should pay particular attention to the development and integration of a new module within a library. 
 
 #### Start
-
 Clone project
 
     git clone git+ssh://git@module.kopaxgroup.com:20024/agd/module-rollup.git
 
-Switch to branch origin : es6 or react (default branch master)
+Switch to branch origin : es6, tdd or react (default branch master)
 
     git checkout es6
     
@@ -177,7 +176,6 @@ Configure eslint in package.json, take a look at different level configuration b
         - self-closing-comp
 
 #### Test
-
 Test with eslint and jest
 
     npm run test
@@ -207,14 +205,7 @@ Generate Readme page
 
 
 ### Bring up to date
-
 Git structure of this module library allow to update main dependencies from master branch, these represent the major update each sub-project need to have in order to stay sustainable. Please refer to abstraction level list below before any update.
-
-#### Level abstraction:
-This module sample is constitued of different abstraction level. These level are adapted to different project application, from simple js project to ES6 defined or React defined project.
-- level 0 : git branch master (init project)
-- level 1 : git branch es6 (es6 code with internal dependencies)
-- level 2 : git branch react (es6 and react jsx code with/without internal and external dependencies)
 
 #### Main dev dependencies
 Find below a quick list of package.json dependencies you have to maintain in priority (not exhaustive list of package.json dependencies)
