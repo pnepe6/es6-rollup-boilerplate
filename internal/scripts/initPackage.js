@@ -44,7 +44,7 @@ function initPackage(packageJson) {
 
   fs.writeFileSync(packageJsonPath, JSON.stringify(pkgJson, null, 2), { encoding: 'utf8' });
 }
-/* eslint-disable no-shadow */
+/* eslint-enable no-shadow */
 
 /* eslint-disable no-console */
 function cleanFolders() {
