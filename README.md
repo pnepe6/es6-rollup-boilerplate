@@ -1,5 +1,5 @@
 # Docs
-Adaptive UMD module boilerplate with multi core level applying cascade's update logic. Quickly begin your small to large modules collections in JS until React.
+Adaptive UMD module boilerplate with multi core level applying cascade's update logic. Quickly begin your small to large modules collection in JS until React.
 
 
 ### Index
@@ -16,7 +16,7 @@ This module boilerplate let you focus on your code "level" and manage only the c
 "Levels" are git branches made up of different core modules to manage the lifecycle of bundle/transpilation modules, from test-based development, from frameworks js to external libraries.
 
 #### Git repository branch level
-In addition to being preconfigurated, each repositoty are updated from the top level (0) until the last level which host your project. In this way each git repository recovers updates from previous level.
+In addition to being preconfigurated, each branch/module are updated from the top level (0) until the last level which host your project. In this way each git repository recovers updates from previous level.
     - core Module boilerplate (level 0): Rollup (UMD bundler) and Babel (CJS/ES transpiler)
     - core TDD extend (level 1): Eslint, Jest
     - core Framework extend (level 2): React
@@ -49,23 +49,22 @@ Clone project
 
     git clone git+ssh://git@module.kopaxgroup.com:20024/agd/module-rollup.git
    
-Switch to branch origin : es6 or react (default branch master)
-
-    git checkout es6
-    
+   
 Init project : it will initialize package.json and reset git folder (note this command could only be used once and will be remove from the package.json script command list after use. For any needs please delete your empty proejct and restart git clone to set a new name)
     
     npm run create my-awesome-module-collection
     
-Add new remote to your project (note to give a correct git url instead of upstream)
+Add new remote to your project
     
-    git remote add branch upstream
+    git remote add branch your-upstream
     
 
 ### Developers
 The developer should pay particular attention to the development and integration of a new module within a library. 
 
-#### Start
+#### Commands
+
+##### Start
 Clone project
 
     git clone git+ssh://git@module.kopaxgroup.com:20024/agd/module-rollup.git
@@ -74,13 +73,45 @@ Switch to branch origin : es6, tdd or react (default branch master)
 
     git checkout es6
     
-Initialize git config project (change ssh url if needed)
-
-    rm -rf .git && git init && git remote add origin ssh://git@module.kopaxgroup.com:20024/agd/module-rollup.git
+Init project : it will initialize package.json and reset git folder (note this command could only be used once and will be remove from the package.json script command list after use. For any needs please delete your empty proejct and restart git clone to set a new name)
+    
+    npm run create my-awesome-module-collection
+    
+Add new remote to your project
+    
+    git remote add branch your-upstream
     
 Install dependencies 
 
     npm install
+
+
+##### Test
+Test with eslint and jest
+
+    npm run test
+    
+
+##### Build
+
+Build the dist and lib folders
+
+    npm run build
+    
+    
+Generate Readme page
+
+1/ Install Node Bootstrap Readme Docs:
+
+
+    npm install -g readme-docs
+    
+2/ Generate Readme build in your folder containing Readme.md, it will generate automaticaly a new build folder with exportable readme page.
+
+
+    readme-docs
+    
+3/ Export your page on dedicated github pages  
 
 
 #### Configuration
@@ -115,10 +146,65 @@ export default {
 }
 ````
 
+##### Babel configuration
+Access babel configuration in .babelrc. Note babel is integrated with roll-up and need to be configurated in rollup.config.js
+
+- Level O + 1 - branch master and es6
+````
+{
+  "presets": [
+    ["env", { "loose": true }]
+  ],
+  "plugins": [
+    "add-module-exports",
+    "transform-object-rest-spread",
+    "transform-class-properties"
+  ]
+}
+````
+
+- Level 2 - branch mreact
+````
+{
+    "presets": [
+      [
+        "env",
+        {
+          "es2015": {
+            "modules": false
+          }
+        }
+      ],
+      "react",
+      "stage-0"
+    ],
+    "env": {
+      "production": {
+        "only": [
+          "app"
+        ],
+        "plugins": [
+          "transform-react-remove-prop-types",
+          "transform-react-constant-elements",
+          "transform-react-inline-elements",
+          "array-includes",
+          "styled-components"
+        ]
+      },
+      "test": {
+        "plugins": [
+          "transform-es2015-modules-commonjs",
+          "dynamic-import-node"
+        ]
+      }
+    }
+  }
+````
+
 ##### Eslint configuration
 Configure eslint in package.json, take a look at different level configuration below before any change.
 
-- level 0 + level 1 - branch master and es6: 
+- level 1 - branch master and es6: 
     - parser: babel-eslint
     - extends: airbnb-base
     - env: 
@@ -175,34 +261,6 @@ Configure eslint in package.json, take a look at different level configuration b
         - require-extension
         - self-closing-comp
 
-#### Test
-Test with eslint and jest
-
-    npm run test
-    
-
-#### Build
-
-Build the dist and lib folders
-
-    npm run build
-    
-    
-Generate Readme page
-
-1/ Install Node Bootstrap Readme Docs:
-
-
-    npm install -g readme-docs
-    
-2/ Generate Readme build in your folder containing Readme.md, it will generate automaticaly a new build folder with exportable readme page.
-
-
-    readme-docs
-    
-3/ Export your page on dedicated github pages  
-
-
 
 ### Bring up to date
 Git structure of this module library allow to update main dependencies from master branch, these represent the major update each sub-project need to have in order to stay sustainable. Please refer to abstraction level list below before any update.
@@ -253,21 +311,26 @@ Find below a quick list of package.json dependencies you have to maintain in pri
 Rollup is dedied to maintain and improve library where webpack are for build and improve standard and web application.
 Different from the development of an application a library must be thought in order to provide working code to users.
 
+Clone project
+
+    git clone git+ssh://git@module.kopaxgroup.com:20024/agd/module-rollup.git
+   
+
 Create new branch
     
     git checkout -b branchName
 
-Delete old git folder and init a new one
-
-    rm -rf .git && git init 
-
-Add your remote branch url to git config
-
-    git remote add origin YourNewBranchUrl
-
 Change key "name" in package.json then initialize it (add new name instead of last one in other key using "name" value)
     
     npm run create name
+
+Add new remote to your project
+    
+    git remote add branch your-upstream
+    
+Install dependencies 
+
+    npm install
 
 
 
