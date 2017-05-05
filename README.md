@@ -13,6 +13,19 @@ Adaptive UMD module boilerplate with multi core level applying cascade's update 
 
 
 
+### Module upgrade philosophy
+
+Because npm projects use many dependencies in each project, manage dependency can be tricky and should be done in a single place.
+
+We decided to keep the master branch as the TOP branch. It gets all the upgrade. This means master will be always the first to get the upgrade.
+
+Every module with extra dependencies (react, ...) are declined in branches and use the same tag number. These branch will upgrade their dependencies after the master.
+
+Project levels:
+   - level 0: core module boilerplate (Rollup UMD bundler and Babel CJS/ES transpiler)
+   - level 1: core TDD extend (Eslint and Jest)
+   - level 2: core framework extend (React)
+   - level 3: core library extend (Bootstrap-styled)
 
 ### Quick start
 
@@ -28,19 +41,6 @@ Add new remote to your project
     
     git remote add branch your-upstream
     
-### Module upgrade philosophy
-
-Because npm projects use many dependencies in each project, manage dependency can be tricky and should be done in a single place.
-
-We decided to keep the master branch as the TOP branch. It gets all the upgrade. This means master will be always the first to get the upgrade.
-
-Every module with extra dependencies (react, ...) are declined in branches and use the same tag number. These branch will upgrade their dependencies after the master.
-
-Project levels:
-   - level 0: core module boilerplate (Rollup UMD bundler and Babel CJS/ES transpiler)
-   - level 1: core TDD extend (Eslint and Jest)
-   - level 2: core framework extend (React)
-   - level 3: core library extend (Bootstrap-styled)
 
 ### Changelog overview
 
