@@ -332,10 +332,10 @@ Configure jest in `package.json`, take a look at different level configuration b
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 75,
-        "branches": 50,
-        "functions": 60,
-        "lines": 60
+        "statements": 95,
+        "branches": 95,
+        "functions": 95,
+        "lines": 95
       }
     },
     "moduleDirectories": [
