@@ -1,45 +1,47 @@
 # Docs
+
 Adaptive UMD module boilerplate with multi core level applying cascade's update logic. Quickly begin your small to large modules collection in JS until React.
 
-
 ### Index
- * [Module documentation](#module-documentation)
+
+ * [Module upgrade philosophy](#module-upgrade-philosophy)
+ * [Quick-start](#quick-start)
  * [Changelog](#changelog)
- * [Quick start](#quick-start)
+ * [Module declination](#module-declination)
  * [Developers](#developers)
  * [Bring up to date](#bring-up-to-date)
- * [Extend module library](#extend-module-library)
 
 
-### Module documentation
+### Module upgrade philosophy
 
-This module boilerplate let you focus on your code "level" and manage only the configuration and dependencies you need for your project. 
-"Levels" are git branches made up of different core modules to manage the lifecycle of bundle/transpilation modules, from test-based development, from frameworks js to external libraries.
+Because npm projects use many dependencies in each project, managin dependency can be tricky and should be done in a single place.
 
+We decided to keep the master branch as the TOP branch. It gets all the upgrade. This means master will be always the first to get the upgrade.
 
-#### Git repository branch level
-In addition to being preconfigurated, each branch/module are updated from the top level (0) until the last level which host your project. In this way each git repository recovers updates from previous level.
-    - core Module boilerplate (level 0): Rollup (UMD bundler) and Babel (CJS/ES transpiler)
-    - core TDD extend (level 1): Eslint (linting), Jest (test)
-    - core Framework extend (level 2): React
-    - core Library extend (level 3): Bootstrap-styled (bootstrap mixed with styled-component for react)
-    - core See [Extend module library](#extend-module-library) for add new level/branch
+Every module with extra dependencies (react, ...) are declined in branches and use the same tag number. These branch will upgrade their dependencies after the master.
 
-#### Common usage:
-- level 0: Quick start any small js project
-starter UMD/CJS/ES modules
+Project levels:
+    - level 0: core module boilerplate (Rollup UMD bundler and Babel CJS/ES transpiler)
+    - level 1: core TDD extend (Eslint and Jest)
+    - level 2: core framework extend (React)
+    - level 3: core library extend (Bootstrap-styled)
 
-- level 1: Quick start small to large js utils modules.
-starter UMD/CJS/ES modules + TDD tools
+### Quick start
 
-- level 2: Quick start small to large modules framework addon, as component library for React
-starter UMD/CJS/ES modules + TDD tools + react framework
+Clone project
 
-- level 3: Quick start small to large specific modules collection as template for React
-starter UMD/CJS/ES modules + TDD tools + React framework + External library (bootstrap-styled)
+    git clone git+ssh://git@module.kopaxgroup.com:20024/agd/module-rollup.git
+   
+Init project : it will initialize `package.json` with default values and remove `.git` folder.
 
+    npm run create my-awesome-module-collection
+    
+Add new remote to your project
+    
+    git remote add branch your-upstream
 
 ### Changelog overview
+
 All notable changes to this project will be documented in CHANGELOG.md.
 
 <li> <a href="https://module.kopaxgroup.com/agd/rollup-umd/commit/70f06bf703751ebc2e6f4ebcd8e8162c51c13412">view commit &bull;</a><code>[2017-05-05 19:07:52 +0700]</code> adrien.gadaud : Update changelog in readme</li>
@@ -59,36 +61,61 @@ All notable changes to this project will be documented in CHANGELOG.md.
 <li> <a href="https://module.kopaxgroup.com/agd/rollup-umd/commit/e69cb0a2606ea5690633dfff073a098072d349e7">view commit &bull;</a><code>[2017-05-05 14:06:56 +0700]</code> adrien.gadaud : Update screip initPackage and package.json</li>
 
 
-### Quick start
-Clone project
+### Module declination
 
-    git clone git+ssh://git@module.kopaxgroup.com:20024/agd/module-rollup.git
-   
-   
-Init project : it will initialize package.json and reset git folder (note this command could only be used once and will be remove from the package.json script command list after use. For any needs please delete your empty proejct and restart git clone to set a new name)
+#### Create a module declination
+
+1. Create the module declination from a tagged version! 
+
+    git checkout v1.0.0
+    git checkout -b dev-react
+    npm install --save-dev react
     
-    npm run create my-awesome-module-collection
+1. Add the peer dependency in your of `package.json`
+1. Add and name it has an external in `rollup.config.js`
+1. Add the declination explanation in `CHANGELOG.md` and `README.md`
+
+    git add -A
+    git commit -m "created declination with react"
+    git push origin dev-react
     
-Add new remote to your project
+1. Tag your module declination
+
+    git tag v1.0.0-react
+    git push --tags
     
-    git remote add branch your-upstream
+#### Upgrading dependencies of an existing declination
+
+Upgrade must be done on the master branch. If you need upgrade from a declination.
+You must pull it from the master branch so you can get the shared dependency upgrade using a single commit.
+
+_if you are on `v1.0.0-react` and you wan't the upgrade made in `v1.0.1`_:
+
+    git checkout tags/v1.0.0-react
+    git pull origin v1.0.1
+
+You can upgrade the other dependencies of your module and tag a new version 
+
+    git add -A
+    git commit -m "upgrade dependency from v1.0.1"
+    git push origin dev-react
+    git tag v1.0.1-react
+    git push --tags
     
 
 ### Developers
+
 The developer should pay particular attention to the development and integration of a new module within a library. 
 
 #### Commands
 
 ##### Start
+
 Clone project
 
     git clone git+ssh://git@module.kopaxgroup.com:20024/agd/module-rollup.git
-
-Switch to branch origin : es6, tdd or react (default branch master)
-
-    git checkout es6
     
-Init project : it will initialize package.json and reset git folder (note this command could only be used once and will be remove from the package.json script command list after use. For any needs please delete your empty proejct and restart git clone to set a new name)
+Init project : it will initialize `package.json` with default values and remove `.git` folder.
     
     npm run create my-awesome-module-collection
     
@@ -100,29 +127,25 @@ Install dependencies
 
     npm install
 
-
 ##### Test
+
 Test with eslint and jest
 
     npm run test
     
-
 ##### Build
 
 Build the dist and lib folders
 
     npm run build
     
-    
-Generate Readme page
+Generate readme page
 
-1/ Install Node Bootstrap Readme Docs:
-
+1/ Install `node-bootstrap-readme-docs`:
 
     npm install -g readme-docs
     
-2/ Generate Readme build in your folder containing Readme.md, it will generate automaticaly a new build folder with exportable readme page.
-
+2/ Readme generate build in your folder containing `README.md`, it will generate automaticaly a new `build` folder with exportable readme page in the same directory.
 
     readme-docs
     
@@ -130,16 +153,21 @@ Generate Readme page
 
 
 #### Configuration
-##### Rollup configuration
-Access rollup configuration in rollup.config.js/
 
-In order to manage DEVELOPMENT and PRODUCTION environment, "targets" and "plugin" key are prepared in advance. The main configuration will mostly focus on "external" and "globals" keys, depending on project external dependencies. For more configuration option please refer to [wiki rollup](https://github.com/rollup/rollup/wiki).
+##### Rollup configuration
+
+Access rollup configuration in `rollup.config.js`
+
+In order to manage `DEVELOPMENT` and `PRODUCTION` environment
+, "targets" and "plugin" key are prepared in advance. 
+The main configuration will mostly focus on "external" and "globals" keys, depending on project external dependencies. For more configuration option please refer to [wiki rollup](https://github.com/rollup/rollup/wiki).
 
 - Level O + 1 - branch master and es6
+
 ````
 export default {
       entry: 'src/index.js',
-      moduleName: 'styled',
+      moduleName: 'module-rollup',
       exports: 'named',
       targets,
       plugins,
@@ -147,10 +175,11 @@ export default {
 ````
 
 - Level 2 - branch React
+
 ````
 export default {
       entry: 'src/index.js',
-      moduleName: 'styled',
+      moduleName: 'module-rollup',
       external: [react],
       exports: 'named',
       targets,
@@ -162,9 +191,11 @@ export default {
 ````
 
 ##### Babel configuration
-Access babel configuration in .babelrc. Note babel is integrated with roll-up and need to be configurated in rollup.config.js
+
+Access babel configuration in `.babelrc`. Note babel is integrated with roll-up and need to be configured in `rollup.config.js`.
 
 - Level O + 1 - branch master and es6
+
 ````
 {
   "presets": [
@@ -179,6 +210,7 @@ Access babel configuration in .babelrc. Note babel is integrated with roll-up an
 ````
 
 - Level 2 - branch react
+
 ````
 {
     "presets": [
@@ -217,7 +249,9 @@ Access babel configuration in .babelrc. Note babel is integrated with roll-up an
 ````
 
 ##### Eslint configuration
-Configure eslint in package.json, take a look at different level configuration below before any change.
+
+Configure eslint in `package.json`, take a look at different level configuration below before any change.
+
 - level 0: no lint 
 - level 1: 
     - parser: babel-eslint
@@ -277,9 +311,12 @@ Configure eslint in package.json, take a look at different level configuration b
         - self-closing-comp
 
 ##### Jest configuration
-Configure jest in package.json, take a look at different level configuration below before any change.
+
+Configure jest in `package.json`, take a look at different level configuration below before any change.
+
 - Level O - no jest
 - Level 1 - branch tdd
+
 ````
 "jest": {
     "roots": [
@@ -306,13 +343,12 @@ Configure jest in package.json, take a look at different level configuration bel
 }
 ````
 
-
-
 ### Bring up to date
-Git structure of this module library allow to update main dependencies from master branch, these represent the major update each sub-project need to have in order to stay sustainable. Please refer to abstraction level list below before any update.
+
+Find below a quick list of package.json dependencies you have to maintain in priority (not exhaustive list of package.json dependencies)
+
 
 #### Main dev dependencies
-Find below a quick list of package.json dependencies you have to maintain in priority (not exhaustive list of package.json dependencies)
 
 - Level O - branch master
     Transpilation (Pay special attention to babel-cli and babel-core, also check other plugins babel and dependency regularly)
@@ -344,6 +380,7 @@ Find below a quick list of package.json dependencies you have to maintain in pri
         - rimraf
         
 - Level 1 - branch tdd
+
     Linting & Testing (Enzyme, jest, lint and eslint are required according to the TDD process, regularly check their dependencies)
         - jest
         - jest-cli
@@ -354,6 +391,7 @@ Find below a quick list of package.json dependencies you have to maintain in pri
         - eslint-config-airbnb-base
 
 - Level 2 - branch react
+
     Transpilation
         - babel-plugin-react-intl
         - babel-plugin-react-transform
@@ -374,37 +412,3 @@ Find below a quick list of package.json dependencies you have to maintain in pri
         - eslint-plugin-react
         - react-addons-test-utils
         - eslint-config-airbnb
-        
-
-### Extend module library
-Rollup is dedied to maintain and improve library where webpack are for build and improve standard and web application.
-Different from the development of an application a library must be thought in order to provide working code to users.
-
-Clone project
-
-    git clone git+ssh://git@module.kopaxgroup.com:20024/agd/module-rollup.git
-   
-
-Create new branch
-    
-    git checkout -b branchName
-
-Change key "name" in package.json then initialize it (add new name instead of last one in other key using "name" value)
-    
-    npm run create name
-
-Add new remote to your project
-    
-    git remote add branch your-upstream
-    
-Install dependencies 
-
-    npm install
-
-
-
-### Troubleshoot
-
-Need to retrieve create cmd ? Add this script command to package.json in "scripts" object.
-
-    "create": "npm run build:clean && node ./internal/scripts/initPackage --",
