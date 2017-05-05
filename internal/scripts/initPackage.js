@@ -28,7 +28,7 @@ function initPackage(packageJson) {
   // Overwrite with new values
   pkgJson = Object.assign(packageJson, {
     name: packageName,
-    description: `Insert ${packageName} description here`,
+    description: '',
     version: '0.0.1',
     module: `dist/${packageName}.es.js`,
     'jsnext:main': `dist/${packageName}.es.js`,

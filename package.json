@@ -1,5 +1,5 @@
 {
-  "name": "module",
+  "name": "rollup-umd",
   "version": "0.0.1",
   "description": "Insert module description here",
   "main": "lib/index.js",
@@ -22,7 +22,7 @@
     "lint-staged": "lint-staged"
   },
   "repository": {
-    "url": ""
+    "url": "rollup-umd"
   },
   "files": [
     "CONTRIBUTING.md",
