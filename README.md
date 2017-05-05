@@ -22,10 +22,10 @@ We decided to keep the master branch as the TOP branch. It gets all the upgrade.
 Every module with extra dependencies (react, ...) are declined in branches and use the same tag number. These branch will upgrade their dependencies after the master.
 
 Project levels:
-    - level 0: core module boilerplate (Rollup UMD bundler and Babel CJS/ES transpiler)
-    - level 1: core TDD extend (Eslint and Jest)
-    - level 2: core framework extend (React)
-    - level 3: core library extend (Bootstrap-styled)
+   - level 0: core module boilerplate (Rollup UMD bundler and Babel CJS/ES transpiler)
+   - level 1: core TDD extend (Eslint and Jest)
+   - level 2: core framework extend (React)
+   - level 3: core library extend (Bootstrap-styled)
 
 ### Quick start
 
