@@ -1,7 +1,7 @@
 {
   "name": "rollup-umd",
   "version": "0.0.1",
-  "description": "Insert module description here",
+  "description": "Adaptive module boilerplate",
   "main": "lib/index.js",
   "jsnext:main": "dist/rollup-umd.es.js",
   "module": "dist/rollup-umd.es.js",
@@ -31,8 +31,8 @@
     "lib",
     "src"
   ],
-  "keywords": "",
-  "author": "",
+  "keywords": ["module", "boilerplate", "babel", "rollup", "react", "TDD"],
+  "author": "Adrien Gadaud <adrien.gadaud@kopaxgroup.com>",
   "license": "UNLICENSED",
   "eslintConfig": {
     "parser": "babel-eslint",
