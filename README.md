@@ -12,8 +12,10 @@ Adaptive UMD module boilerplate with multi core level applying cascade's update 
 
 
 ### Module documentation
+
 This module boilerplate let you focus on your code "level" and manage only the configuration and dependencies you need for your project. 
 "Levels" are git branches made up of different core modules to manage the lifecycle of bundle/transpilation modules, from test-based development, from frameworks js to external libraries.
+
 
 #### Git repository branch level
 In addition to being preconfigurated, each branch/module are updated from the top level (0) until the last level which host your project. In this way each git repository recovers updates from previous level.
