@@ -85,8 +85,8 @@ All notable changes to this project will be documented in CHANGELOG.md.
 
     git tag v1.0.0-react
     git push --tags
-    
-#### Upgrading dependencies of an existing declination
+
+#### Upgrading dependencies of an existing declination
 
 Upgrade must be done on the master branch. If you need upgrade from a declination.
 You must pull it from the master branch so you can get the shared dependency upgrade using a single commit.
