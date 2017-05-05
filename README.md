@@ -12,9 +12,10 @@ Adaptive UMD module boilerplate with multi core level applying cascade's update 
  * [Bring up to date](#bring-up-to-date)
 
 
+
 ### Module upgrade philosophy
 
-Because npm projects use many dependencies in each project, managin dependency can be tricky and should be done in a single place.
+Because npm projects use many dependencies in each project, manage dependency can be tricky and should be done in a single place.
 
 We decided to keep the master branch as the TOP branch. It gets all the upgrade. This means master will be always the first to get the upgrade.
 
