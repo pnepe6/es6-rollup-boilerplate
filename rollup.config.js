@@ -54,6 +54,7 @@ const plugins = [
     ],
     plugins: [
       'external-helpers',
+      'add-module-exports',
       'transform-object-rest-spread',
       'transform-class-properties',
     ].filter(Boolean),
