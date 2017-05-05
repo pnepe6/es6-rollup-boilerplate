@@ -20,9 +20,9 @@ This module boilerplate let you focus on your code "level" and manage only the c
 #### Git repository branch level
 In addition to being preconfigurated, each branch/module are updated from the top level (0) until the last level which host your project. In this way each git repository recovers updates from previous level.
     - core Module boilerplate (level 0): Rollup (UMD bundler) and Babel (CJS/ES transpiler)
-    - core TDD extend (level 1): Eslint, Jest
+    - core TDD extend (level 1): Eslint (linting), Jest (test)
     - core Framework extend (level 2): React
-    - core Library extend (level 3): Bootstrap-styled
+    - core Library extend (level 3): Bootstrap-styled (bootstrap mixed with styled-component for react)
     - core See [Extend module library](#extend-module-library) for add new level/branch
 
 #### Common usage:
@@ -39,11 +39,17 @@ starter UMD/CJS/ES modules + TDD tools + react framework
 starter UMD/CJS/ES modules + TDD tools + React framework + External library (bootstrap-styled)
 
 
-### Changelog
-#### Added
-- Support for jsdom and other browsers that do not implement [ownerNode](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet/ownerNode), thanks to [@zvictor](https://github.com/zvictor)
-
-#### Changed
+### Changelog overview
+All notable changes to this project will be documented in CHANGELOG.md.
+<li> <a href="url/commit/c5b714d570c289a78978482fa96fb1e33fad707d">view commit &bull;</a><code>[2017-05-05 13:44:18 +0700]</code> adrien.gadaud : Update redme</li>
+<li> <a href="url/commit/c5a0365d865339570b6d632b74d06d093883dcb1">view commit &bull;</a><code>[2017-05-05 13:41:58 +0700]</code> adrien.gadaud : Update rollup.config</li>
+<li> <a href="url/commit/52a5a523b9df9aa37c3a3e45d3d13b6ea1b0f753">view commit &bull;</a><code>[2017-05-05 13:41:36 +0700]</code> adrien.gadaud : Update babelrc</li>
+<li> <a href="url/commit/14489c78d75ead0461e5e5de268997b5521a3e03">view commit &bull;</a><code>[2017-05-05 12:48:50 +0700]</code> adrien.gadaud : Remove danger.js</li>
+<li> <a href="url/commit/da951a21d9b49df29f4af0787fa6d08e0b71cc73">view commit &bull;</a><code>[2017-05-05 12:25:43 +0700]</code> adrien.gadaud : Update README</li>
+<li> <a href="url/commit/969f20474fb427d38c97f29708287fe7eb070ec4">view commit &bull;</a><code>[2017-05-05 12:25:29 +0700]</code> adrien.gadaud : Create dangerfile.js with update package.json</li>
+<li> <a href="url/commit/7779e986f29727eebac2235759a9ee980d301ac1">view commit &bull;</a><code>[2017-05-05 01:00:44 +0700]</code> adrien.gadaud : Update readme and remove react dep in package.json</li>
+<li> <a href="url/commit/e30a86a48232854e27259345986e6c20542ffbe0">view commit &bull;</a><code>[2017-05-04 21:48:56 +0700]</code> adrien.gadaud : delete LICENCE.md</li>
+<li> <a href="url/commit/994f0bea37ef4a339a6f08815f1d7dbfce5846f2">view commit &bull;</a><code>[2017-05-04 17:26:52 +0700]</code> adrien.gadaud : Correct initPackage.js</li>
 
 
 ### Quick start
@@ -165,7 +171,7 @@ Access babel configuration in .babelrc. Note babel is integrated with roll-up an
 }
 ````
 
-- Level 2 - branch mreact
+- Level 2 - branch react
 ````
 {
     "presets": [
@@ -205,8 +211,8 @@ Access babel configuration in .babelrc. Note babel is integrated with roll-up an
 
 ##### Eslint configuration
 Configure eslint in package.json, take a look at different level configuration below before any change.
-
-- level 1 - branch master and es6: 
+- level 0: no lint 
+- level 1: 
     - parser: babel-eslint
     - extends: airbnb-base
     - env: 
@@ -239,7 +245,7 @@ Configure eslint in package.json, take a look at different level configuration b
     - class-methods-use-this
     - require-yield
 
-- level 2 - branch react: (include level 0 + level 1)
+- level 2 - branch react
     - extends: airbnb
     - plugins: 
         - react
@@ -263,6 +269,37 @@ Configure eslint in package.json, take a look at different level configuration b
         - require-extension
         - self-closing-comp
 
+##### Jest configuration
+Configure jest in package.json, take a look at different level configuration below before any change.
+- Level O - no jest
+- Level 1 - branch tdd
+````
+"jest": {
+    "roots": [
+      "<rootDir>/src/"
+    ],
+    "testPathIgnorePatterns": [],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/**/*.test.{js,jsx}",
+      "!src/index.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 75,
+        "branches": 50,
+        "functions": 60,
+        "lines": 60
+      }
+    },
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
+}
+````
+
+
 
 ### Bring up to date
 Git structure of this module library allow to update main dependencies from master branch, these represent the major update each sub-project need to have in order to stay sustainable. Please refer to abstraction level list below before any update.
@@ -282,17 +319,8 @@ Find below a quick list of package.json dependencies you have to maintain in pri
         - babel-plugin-transform-object-rest-spread
         - babel-plugin-transform-react-remove-prop-types
         - babel-preset-env
+        - babel-preset-stage-0
     
-    Linting & Testing (Enzyme, jest, lint and eslint are required according to the TDD process, regularly check their dependencies)
-        - enzyme
-        - jest
-        - lint-staged
-        - pre-commit
-        - eslint
-        - eslint-config-airbnb
-        - eslint-config-airbnb-base
-        - eslint-plugin-import
-
     Bundle builder (Rollup is the core builder, please take note of any update concerning these dependencies)
         - rollup
         - rollup-plugin-babel
@@ -308,7 +336,39 @@ Find below a quick list of package.json dependencies you have to maintain in pri
         - jsdom
         - rimraf
         
+- Level 1 - branch tdd
+    Linting & Testing (Enzyme, jest, lint and eslint are required according to the TDD process, regularly check their dependencies)
+        - jest
+        - jest-cli
+        - lint-staged
+        - pre-commit
+        - eslint
+        - eslint-plugin-import
+        - eslint-config-airbnb-base
+
+- Level 2 - branch react
+    Transpilation
+        - babel-plugin-react-intl
+        - babel-plugin-react-transform
+        - babel-plugin-transform-react-constant-elements
+        - babel-plugin-transform-react-inline-elements
+        - babel-plugin-transform-react-remove-prop-types
+        - babel-preset-react
+        - babel-preset-react-hmre
+        - babel-preset-stage-2
         
+    React
+        - react
+        - react-dom
+        
+    Linting & Testing
+        - enzyme
+        - eslint-plugin-jsx-a11y
+        - eslint-plugin-react
+        - react-addons-test-utils
+        - eslint-config-airbnb
+        
+
 ### Extend module library
 Rollup is dedied to maintain and improve library where webpack are for build and improve standard and web application.
 Different from the development of an application a library must be thought in order to provide working code to users.
