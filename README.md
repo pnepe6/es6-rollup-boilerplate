@@ -13,15 +13,15 @@ Adaptive UMD module boilerplate with multi core level applying cascade's update 
 
 ### Module documentation
 This module boilerplate let you focus on your code "level" and manage only the configuration and dependencies you need for your project. 
-Levels are git repositories branch composed of different core managing modules lifecycle from bundle/transpilation, test driven development, js frameworks until external libraries.
+"Levels" are git branches made up of different core modules to manage the lifecycle of bundle/transpilation modules, from test-based development, from frameworks js to external libraries.
 
 #### Git repository branch level
 In addition to being preconfigurated, each repositoty are updated from the top level (0) until the last level which host your project. In this way each git repository recovers updates from previous level.
-    - Module boilerplate (level 0): Rollup (UMD bundler) and Babel (CJS/ES transpiler)
-    - TDD extend (level 1): Eslint, Jest
-    - Framework extend (level 2): React
-    - Library extend (level 3): Bootstrap-styled
-    - See [Extend module library](#extend-module-library) for add new level/branch
+    - core Module boilerplate (level 0): Rollup (UMD bundler) and Babel (CJS/ES transpiler)
+    - core TDD extend (level 1): Eslint, Jest
+    - core Framework extend (level 2): React
+    - core Library extend (level 3): Bootstrap-styled
+    - core See [Extend module library](#extend-module-library) for add new level/branch
 
 #### Common usage:
 - level 0: Quick start any small js project
