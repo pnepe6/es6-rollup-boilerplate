@@ -40,7 +40,20 @@ const plugins = [
     },
   },
   nodeResolve(),
-  commonjs(),
+  commonjs({
+    include: 'node_modules/**',
+    namedExports:
+    {
+      './node_modules/react/react.js':
+      [
+        'cloneElement',
+        'createElement',
+        'PropTypes',
+        'Children',
+        'Component',
+      ],
+    },
+  }),
   replace({
     'process.env.NODE_ENV': JSON.stringify(prod ? 'production' : 'development'),
   }),
@@ -49,14 +62,14 @@ const plugins = [
   }),
   babel({
     babelrc: false,
-    presets: [
-      ['env', { modules: false, loose: true }],
-    ],
+    exclude: 'node_modules/**',
+    presets: [['es2015', { modules: false }], 'stage-0', 'react'],
     plugins: [
       'external-helpers',
-      'add-module-exports',
-      'transform-object-rest-spread',
-      'transform-class-properties',
+      'transform-react-remove-prop-types',
+      'transform-react-constant-elements',
+      'transform-react-inline-elements',
+      'array-includes',
     ].filter(Boolean),
   }),
   json(),
@@ -67,9 +80,9 @@ if (prod) plugins.push(uglify(), visualizer({ filename: './bundle-stats.html' })
 export default {
   entry: 'src/index.js',
   moduleName: pkg.name,
-  external: [],
+  external: ['react'],
   exports: 'named',
   targets,
   plugins,
-  globals: {},
+  globals: { react: 'React' },
 };
